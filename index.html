@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Secret Proposal</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background: linear-gradient(to right, #fbc2eb, #a6c1ee);
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      overflow: hidden;
+    }
+
+    .box, .proposal {
+      background-color: white;
+      padding: 30px;
+      border-radius: 20px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+    }
+
+    input {
+      padding: 10px;
+      width: 200px;
+      margin: 10px 0;
+      border-radius: 10px;
+      border: 1px solid #ccc;
+    }
+
+    button {
+      padding: 10px 20px;
+      margin: 5px;
+      font-size: 16px;
+      border-radius: 10px;
+      border: none;
+      cursor: pointer;
+      background-color: #ff69b4;
+      color: white;
+      transition: 0.3s;
+      position: relative;
+    }
+
+    button:hover {
+      background-color: #ff1493;
+    }
+
+    .hidden {
+      display: none;
+    }
+
+    #celebration {
+      font-size: 24px;
+      margin-top: 20px;
+      animation: pop 0.5s ease-in-out;
+    }
+
+    @keyframes pop {
+      0% { transform: scale(0); opacity: 0; }
+      100% { transform: scale(1); opacity: 1; }
+    }
+
+    #no {
+      position: absolute;
+    }
+  </style>
+</head>
+<body>
+  <!-- Page 1: Password -->
+  <div id="passwordPage" class="box">
+    <h2>Enter the Password</h2>
+    <input type="password" id="password" placeholder="Your birthday">
+    <br>
+    <button onclick="checkPassword()">Submit</button>
+    <p id="error" style="color: red;"></p>
+  </div>
+
+  <!-- Page 2: Proposal -->
+  <div id="proposalPage" class="proposal hidden">
+    <h1>💍 Will you marry me?</h1>
+    <div>
+      <button id="yes">Yes ❤️</button>
+      <button id="no">No ❌</button>
+    </div>
+    <div id="celebration" class="hidden">💖💍✨ I knew you'd say YES! ✨💍💖</div>
+  </div>
+
+  <script>
+    const correctPassword = "1605";
+
+    function checkPassword() {
+      const input = document.getElementById("password").value;
+      const error = document.getElementById("error");
+
+      if (input === correctPassword) {
+        document.getElementById("passwordPage").classList.add("hidden");
+        document.getElementById("proposalPage").classList.remove("hidden");
+      } else {
+        error.textContent = "Wrong password! Try again...";
+      }
+    }
+
+    const yesBtn = document.getElementById('yes');
+    const noBtn = document.getElementById('no');
+    const celebration = document.getElementById('celebration');
+
+    yesBtn.onclick = () => {
+      celebration.classList.remove('hidden');
+      yesBtn.style.display = "none";
+      noBtn.style.display = "none";
+    };
+
+    noBtn.onmouseover = () => {
+      const x = Math.random() * (window.innerWidth - noBtn.offsetWidth);
+      const y = Math.random() * (window.innerHeight - noBtn.offsetHeight);
+      noBtn.style.left = `${x}px`;
+      noBtn.style.top = `${y}px`;
+    };
+  </script>
+</body>
+</html>
